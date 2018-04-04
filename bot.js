@@ -28,9 +28,9 @@ client.on('message', async msg => {
     const serverQueue = queue.get(msg.guild.id);
     
     if (msg.content.startsWith(`${PREFIX}play`)) {
+        if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name).includes(r.name).includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
         const voiceChannel = msg.member.voiceChannel;
         if(!args[1]) return msg.channel.send('Ponme algo para que pueda reproducir!')
-        if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name).includes(r.name).includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
         if(!voiceChannel) return msg.channel.send('Ponte en un canal de Voz!!')
         const permissions = voiceChannel.permissionsFor(msg.client.user);
         if (!permissions.has('CONNECT')) {
@@ -80,7 +80,7 @@ client.on('message', async msg => {
         if (!serverQueue) return msg.channel.send('No hay nada reproduciendose.');
         return msg.channel.send(`Se esta reproduciendo: ${serverQueue.songs[0].titulo}`);
     }else if(msg.content.startsWith(`${PREFIX}queue`)) {
-        if(!msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
+        if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
         if (!serverQueue) return msg.channel.send('No hay nada reproduciendose.');
         return msg.channel.send(`
 _**Lista de Canciones:**_
