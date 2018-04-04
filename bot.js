@@ -26,11 +26,11 @@ client.on('message', async msg => {
     const SearchString = args.slice(1).join(' ');
     const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
     const serverQueue = queue.get(msg.guild.id);
-    if(!msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"])) return msg.channel.send('No eres un admin lo siento umu')
-
+    
     if (msg.content.startsWith(`${PREFIX}play`)) {
         const voiceChannel = msg.member.voiceChannel;
         if(!args[1]) return msg.channel.send('Ponme algo para que pueda reproducir!')
+        if(!msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"])) return msg.channel.send('No eres un admin lo siento umu')
         if(!voiceChannel) return msg.channel.send('Ponte en un canal de Voz!!')
         const permissions = voiceChannel.permissionsFor(msg.client.user);
         if (!permissions.has('CONNECT')) {
@@ -54,18 +54,21 @@ client.on('message', async msg => {
            return handleVideo(video, msg, voiceChannel);
         }
     } else if (msg.content.startsWith(`${PREFIX}skip`)) {
+        if(!msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"])) return msg.channel.send('No eres un admin lo siento umu')
         if (!msg.member.voiceChannel) return msg.channel.send('No estas en un canal de voz!');
         if (!serverQueue) return msg.channel.send('No hay nada para hacer skip');
         msg.channel.send(`Cancion saltada por ${msg.author.username}`)
         serverQueue.connection.dispatcher.end();
         return undefined;
     } else if (msg.content.startsWith(`${PREFIX}stop`)) {
+        if(!msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"])) return msg.channel.send('No eres un admin lo siento umu')
         if (!msg.member.voiceChannel) return msg.channel.send('No estas en un canal de voz!');
         if (!serverQueue) return msg.channel.send('No hay nada para poderme parar');
         serverQueue.songs = [];
         serverQueue.connection.dispatcher.end();
         return undefined;
     }else if (msg.content.startsWith(`${PREFIX}volumen`)) {
+        if(!msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"])) return msg.channel.send('No eres un admin lo siento umu')
         if (!serverQueue) return msg.channel.send('No hay nada reproduciendose.');
         if (!msg.member.voiceChannel) return msg.channel.send('No estas en un canal de voz!');
         if (!args[1]) return msg.channel.send(`El volumen actual es: ${serverQueue.volume}`)
@@ -73,9 +76,11 @@ client.on('message', async msg => {
         serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 100);
         return msg.channel.send(`El volumen fue cambiado a: ${args[1]}`)
     } if (msg.content.startsWith(`${PREFIX}np`)) {
+        if(!msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"])) return msg.channel.send('No eres un admin lo siento umu')
         if (!serverQueue) return msg.channel.send('No hay nada reproduciendose.');
         return msg.channel.send(`Se esta reproduciendo: ${serverQueue.songs[0].titulo}`);
-    }else if(msg.content.startsWith(`${PREFIX}queue`)){
+    }else if(msg.content.startsWith(`${PREFIX}queue`)) {
+        if(!msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"])) return msg.channel.send('No eres un admin lo siento umu')
         if (!serverQueue) return msg.channel.send('No hay nada reproduciendose.');
         return msg.channel.send(`
 _**Lista de Canciones:**_
