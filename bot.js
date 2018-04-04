@@ -26,6 +26,7 @@ client.on('message', async msg => {
     const SearchString = args.slice(1).join(' ');
     const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
     const serverQueue = queue.get(msg.guild.id);
+    if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name).includes(r.name).includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
     
     if (msg.content.startsWith(`${PREFIX}play`)) {
         const voiceChannel = msg.member.voiceChannel;
@@ -48,8 +49,7 @@ client.on('message', async msg => {
                     console.error(err)
                     return msg.channel.send('No he encontrado ningun resultado.');
                 }
-            }    
-            if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name).includes(r.name).includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
+            }
            return handleVideo(video, msg, voiceChannel);
         }
     } else if (msg.content.startsWith(`${PREFIX}skip`)) {
