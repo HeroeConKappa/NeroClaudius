@@ -30,6 +30,7 @@ client.on('message', async msg => {
 
     if (msg.content.startsWith(`${PREFIX}play`)) {
         const voiceChannel = msg.member.voiceChannel;
+        if(!args[1]) return msg.channel.send('Ponme algo para que pueda reproducir!')
         if(!voiceChannel) return msg.channel.send('Ponte en un canal de Voz!!')
         const permissions = voiceChannel.permissionsFor(msg.client.user);
         if (!permissions.has('CONNECT')) {
