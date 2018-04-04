@@ -28,11 +28,11 @@ client.on('message', async msg => {
     const serverQueue = queue.get(msg.guild.id);
     
     if (msg.content.startsWith(`${PREFIX}play`)) {
-        if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name).includes(r.name).includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
         const voiceChannel = msg.member.voiceChannel;
         if(!args[1]) return msg.channel.send('Ponme algo para que pueda reproducir!')
         if(!voiceChannel) return msg.channel.send('Ponte en un canal de Voz!!')
         const permissions = voiceChannel.permissionsFor(msg.client.user);
+        if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name).includes(r.name).includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
         if (!permissions.has('CONNECT')) {
             return msg.channel.send('Dame permisos para entrar!!')
         }
