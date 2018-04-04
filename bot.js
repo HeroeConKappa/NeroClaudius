@@ -26,8 +26,7 @@ client.on('message', async msg => {
     const SearchString = args.slice(1).join(' ');
     const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
     const serverQueue = queue.get(msg.guild.id);
-    if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name).includes(r.name).includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
-    
+     
     if (msg.content.startsWith(`${PREFIX}play`)) {
         const voiceChannel = msg.member.voiceChannel;
         if(!args[1]) return msg.channel.send('Ponme algo para que pueda reproducir!')
@@ -41,6 +40,7 @@ client.on('message', async msg => {
         } else {
             try {
                 var video = await youtube.getVideo(url);
+                if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name).includes(r.name).includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
             } catch (error) {
                 try { 
                     var videos = await youtube.searchVideos(SearchString, 1);
