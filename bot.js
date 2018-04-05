@@ -71,7 +71,7 @@ client.on('message', async msg => {
         serverQueue.volume = args[1];
         serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 100);
         return msg.channel.send(`El volumen fue cambiado a: ${args[1]}`)
-    } if (msg.content.startsWith(`${PREFIX}np`)) {
+    } else if (msg.content.startsWith(`${PREFIX}np`)) {
         if (!serverQueue) return msg.channel.send('No hay nada reproduciendose.');
         return msg.channel.send(`Se esta reproduciendo: ${serverQueue.songs[0].titulo}`);
     }else if(msg.content.startsWith(`${PREFIX}queue`)) {
