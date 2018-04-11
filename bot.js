@@ -58,13 +58,13 @@ client.on('message', async msg => {
         msg.channel.send(`Cancion saltada por ${msg.author.username}`)
         serverQueue.connection.dispatcher.end();
         return undefined;
-    } else if (message.content.startsWith(`${PREFIX}stop`)) {
+    } else if (msg.content.startsWith(`${PREFIX}stop`)) {
         if (!msg.member.voiceChannel) return msg.channel.send('No estas en un canal de voz!');
         if (!serverQueue) return msg.channel.send('No hay nada para poderme parar');
         serverQueue.songs = [];
         serverQueue.connection.dispatcher.end();
         return undefined;
-    }else if (msg.content.startsWith(`${PREFIX}volumen`)) 
+    }else if (msg.content.startsWith(`${PREFIX}volumen`)) {
         if (!serverQueue) return msg.channel.send('No hay nada reproduciendose.');
         if (!msg.member.voiceChannel) return msg.channel.send('No estas en un canal de voz!');
         if (!args[1]) return msg.channel.send(`El volumen actual es: ${serverQueue.volume}`)
@@ -74,7 +74,7 @@ client.on('message', async msg => {
     } if (msg.content.startsWith(`${PREFIX}np`)) {
         if (!serverQueue) return msg.channel.send('No hay nada reproduciendose.');
         return msg.channel.send(`Se esta reproduciendo: ${serverQueue.songs[0].titulo}`);
-    }else if(msg.content.startsWith(`${PREFIX}queue`)) {
+    }else if(msg.content.startsWith(`${PREFIX}queue`)){
         if (!serverQueue) return msg.channel.send('No hay nada reproduciendose.');
         return msg.channel.send(`
 _**Lista de Canciones:**_
