@@ -101,7 +101,6 @@ ${serverQueue.songs.map(song => `-${song.titulo}`).join('\n')}
 
 async function handleVideo(video, msg, voiceChannel, playlist = false) {
     const serverQueue = queue.get(msg.guild.id);
-    if(msg.member.roles.some(r=>["Los Bien Vergas", "Secretarios de los Bien Vergas", "Admins"].includes(r.name).includes(r.name))) return msg.channel.send('No eres un admin lo siento umu')
     const song = {
         id: video.id,
         titulo: Util.escapeMarkdown(video.title),
