@@ -28,9 +28,7 @@ client.on('message', async msg => {
     const serverQueue = queue.get(msg.guild.id);
      
     if (msg.content.startsWith(`${PREFIX}play`)) {
-        
         const voiceChannel = msg.member.voiceChannel;
-        if(!args[1]) return msg.channel.send('Ponme algo para que pueda reproducir!')
         if(!voiceChannel) return msg.channel.send('Ponte en un canal de Voz!!')
         const permissions = voiceChannel.permissionsFor(msg.client.user);
         if (!permissions.has('CONNECT')) {
@@ -49,10 +47,11 @@ client.on('message', async msg => {
                     console.error(err)
                     return msg.channel.send('No he encontrado ningun resultado.');
                 }
-            }
+            }    
+
            return handleVideo(video, msg, voiceChannel);
         }
-    } else if (message.content.startsWith(`${PREFIX}skip`)) {
+    } else if (msg.content.startsWith(`${PREFIX}skip`)) {
         if (!msg.member.voiceChannel) return msg.channel.send('No estas en un canal de voz!');
         if (!serverQueue) return msg.channel.send('No hay nada para hacer skip');
         msg.channel.send(`Cancion saltada por ${msg.author.username}`)
